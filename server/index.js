@@ -1,39 +1,36 @@
+const http = require('http');
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const compression = require('compression');
-const path = require('path');
 const bodyParser = require('body-parser');
 const webpack = require('webpack');
-const http = require('http');
 const webpackDevMiddleware = require('webpack-dev-middleware');
+
 const webpackConfig = require('../webpack.config.dev');
 const webpackConfigProd = require('../webpack.config');
+const routes = require('./routes');
 
+// Expose environment variables on this document
 require('dotenv').config();
 
 const isDev = process.env.NODE_ENV === 'development';
-const compiler = webpack(isDev? webpackConfig : webpackConfigProd);
+const compiler = webpack(isDev ? webpackConfig : webpackConfigProd);
 
-const routes = require('./routes');
 const app = express();
 
-app.all('*', (req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type');
-  next();
-});
-
+// start webpack compiler, together with node process.
 app.use(webpackDevMiddleware(compiler, {
-  publicPath: webpackConfig.output.publicPath
+  publicPath: webpackConfig.output.publicPath,
 }));
 
-app.use(cors());
+app.use(cors()); // allow cors
 app.use(bodyParser.json({ limit: '5mb' }));
 app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
-app.use(compression());
+app.use(compression()); // enable gzip compression.
 
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
-app.use('/capsule', routes);
+app.use('/assets', express.static(path.join(__dirname, 'assets'))); // expose a folder
+app.use('/capsule', routes); // add API route settings
 
 const server = http.createServer(app);
 
