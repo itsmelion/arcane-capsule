@@ -1,3 +1,17 @@
-#Home {
+@import '~flamework/src/vars';
 
+#Home header {
+  padding: 3rem;
+  h1 { font-weight: 600; color: $white1; }
+  sub { font-weight: 400; color: $white3; }
+}
+
+.process {
+  padding: 1rem;
+  section {
+    border-radius: 1rem;
+    border: 1pt solid $white5;
+    padding: 1rem;
+    &:nth-of-type(2) { margin: 0 .5rem; }
+  }
 }

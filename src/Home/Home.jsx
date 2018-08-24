@@ -8,7 +8,7 @@ const Home = () => (
       <sub>A video converter from outta space</sub>
     </header>
 
-    <div row="" nowrap="">
+    <div className="row nowrap process">
       <section flex="" column="" align="center">
         File upload
       </section>
