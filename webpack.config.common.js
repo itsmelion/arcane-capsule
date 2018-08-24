@@ -11,6 +11,7 @@ require('dotenv').config();
 
 const common = {
   entry: [
+    `webpack-hot-middleware/client?http://${process.env.HOST}:${process.env.PORT}/`,
     require.resolve('react-dev-utils/webpackHotDevClient'),
     './src/index.jsx',
   ],
@@ -61,21 +62,25 @@ const common = {
   ],
   module: {
     rules: [
-      { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' },
       {
         test: /\.(js|jsx|mjs)$/,
         enforce: 'pre',
         use: [
+          { loader: 'source-map-loader' },
           {
             options: {
               formatter: eslintFormatter,
               eslintPath: require.resolve('eslint'),
-
             },
             loader: 'eslint-loader',
           },
         ],
         include: resolve(__dirname, 'src'),
+      },
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: { loader: 'babel-loader' },
       },
       {
         test: /\.tsx?$/,

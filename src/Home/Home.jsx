@@ -1,0 +1,27 @@
+import React from 'react';
+import './Home.scss';
+
+const Home = () => (
+  <main flex="" id="Home" align="center" fill="">
+    <header>
+      <h1>{process.env.appName}</h1>
+      <sub>A video converter from outta space</sub>
+    </header>
+
+    <div row="" nowrap="">
+      <section flex="" column="" align="center">
+        File upload
+      </section>
+
+      <section flex="" column="" align="center">
+        Process
+      </section>
+
+      <section flex="" column="" align="center">
+        Result
+      </section>
+    </div>
+  </main>
+);
+
+export default Home;

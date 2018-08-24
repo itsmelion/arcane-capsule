@@ -22,7 +22,12 @@ const app = express();
 // start webpack compiler, together with node process.
 app.use(webpackDevMiddleware(compiler, {
   publicPath: webpackConfig.output.publicPath,
+  noInfo: true,
+  hot: true,
+  inline: true,
 }));
+// enables hot module replacement
+app.use(require('webpack-hot-middleware')(compiler));
 
 app.use(cors()); // allow cors
 app.use(bodyParser.json({ limit: '5mb' }));

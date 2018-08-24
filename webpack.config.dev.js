@@ -1,10 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
+const { resolve } = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const errorOverlayMiddleware = require('react-dev-utils/errorOverlayMiddleware');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
-const { resolve } = require('path');
 const common = require('./webpack.config.common');
 
 const devMode = process.env.NODE_ENV === 'development';
@@ -53,22 +52,6 @@ const config = merge(common, {
       chunkFilename: '[id].css',
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new BrowserSyncPlugin({
-      port: Number(process.env.browserSyncPort),
-      proxy: `http://${process.env.HOST}:${process.env.PORT}`,
-      watchOptions: {
-        ignoreInitial: true,
-        ignored: './src',
-      },
-      injectChanges: true,
-      ui: false,
-      open: false,
-      ghostMode: false,
-      logPrefix: process.env.appName,
-      logFileChanges: true,
-    }, {
-      reload: false,
-    }),
   ],
   devtool: 'eval',
   devServer: {
