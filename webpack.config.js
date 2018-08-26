@@ -43,6 +43,7 @@ const config = merge(common, {
         test: /\.s[ac]ss$/,
         use: [
           MiniCssExtractPlugin.loader,
+          'clean-css-loader',
           {
             loader: 'css-loader',
             options: {

@@ -65,6 +65,7 @@ typings/
 **/Thumbs.ds
 **/npm-debug.log
 dist
-.tmp
+.tmp*
+tmp*
 build
 .vscode

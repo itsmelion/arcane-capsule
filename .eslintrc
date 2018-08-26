@@ -20,7 +20,7 @@
     "no-unused-vars": 2,
     "no-param-reassign": "warn",
     "max-len": ["warn", { "code": 90 }],
-    "no-console": ["warn", { "allow": ["warn", "info"] }],
+    "no-console": ["warn", { "allow": ["warn", "info", "error"] }],
     "react/prop-types": 0,
     "react/jsx-one-expression-per-line": 0
   },

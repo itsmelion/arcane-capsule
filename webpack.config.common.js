@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const eslintFormatter = require('react-dev-utils/eslintFormatter');
+const eslintFormatter = require('react-dev-utils-for-webpack4/eslintFormatter');
 const Dotenv = require('dotenv-webpack');
 const { resolve } = require('path');
 
@@ -11,8 +11,8 @@ require('dotenv').config();
 
 const common = {
   entry: [
+    require.resolve('react-dev-utils-for-webpack4/webpackHotDevClient'),
     `webpack-hot-middleware/client?http://${process.env.HOST}:${process.env.PORT}/`,
-    require.resolve('react-dev-utils/webpackHotDevClient'),
     './src/index.jsx',
   ],
   output: {
@@ -92,7 +92,12 @@ const common = {
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          'clean-css-loader',
+          'css-loader',
+          'postcss-loader',
+        ],
       },
       {
         test: /\.html$/,

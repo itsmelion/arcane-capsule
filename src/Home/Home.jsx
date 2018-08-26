@@ -1,5 +1,6 @@
 import React from 'react';
 import './Home.scss';
+import FileUpload from '../components/FileUpload/FileUpload';
 
 const Home = () => (
   <main flex="" id="Home" align="center" fill="">
@@ -10,7 +11,7 @@ const Home = () => (
 
     <div className="row nowrap process">
       <section flex="" column="" align="center">
-        File upload
+        <FileUpload />
       </section>
 
       <section flex="" column="" align="center">
