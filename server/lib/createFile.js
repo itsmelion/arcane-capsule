@@ -6,7 +6,7 @@ const S3 = new AWS.S3({
   secretAccessKey: process.env.AWS_SECRET,
 });
 
-module.exports = function createFile(file, acl = 'private') {
+module.exports = function createFile(file, acl = 'public-read') {
   return new Promise(((resolve, reject) => {
     S3.putObject({
       ACL: acl,
@@ -16,7 +16,7 @@ module.exports = function createFile(file, acl = 'private') {
       ContentType: file.type,
     }, (error) => {
       if (error) {
-        console.info(error);
+        console.error(error);
         return reject(error.message);
       }
       console.info(`File uploaded: ${file.name}`);

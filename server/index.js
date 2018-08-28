@@ -1,12 +1,12 @@
 require('dotenv').config(); // Expose environment variables on this document
 const http = require('http');
 const express = require('express');
-const io = require('socket.io');
 const cors = require('cors');
 const compression = require('compression');
 const bodyParser = require('body-parser');
 const multipart = require('connect-multiparty');
 const webpack = require('webpack');
+const io = require('socket.io');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const HotModuleReplacement = require('webpack-hot-middleware');
 const webpackConfig = require('../webpack.config.dev');
@@ -17,6 +17,10 @@ const isDev = process.env.NODE_ENV === 'development';
 const compiler = webpack(isDev ? webpackConfig : webpackConfigProd);
 
 const app = express();
+const server = http.createServer(app);
+const socket = io(server);
+
+app.set('io', socket);
 
 // start webpack compiler, together with node process.
 app.use(webpackDevMiddleware(compiler, {
@@ -40,14 +44,8 @@ app.use(compression()); // enable gzip compression.
 app.use('/upload', routes);
 
 const port = isDev ? process.env.nodePort : (process.env.PORT || 80);
-const server = http.createServer(app);
 
 server.listen(port, process.env.HOST, () => {
   console.info(`🖥️  ${process.env.appName} up at: ${process.env.HOST}:${port}`);
 });
 
-io(server)
-  .on('connection', (socket) => {
-    socket.emit('server', { hello: 'world' });
-    socket.on('client', data => console.info(data));
-  });

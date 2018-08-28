@@ -55,4 +55,12 @@ router.post('/', (req, res) => {
     });
 });
 
+router.get('/io', (req, res) => {
+  const io = req.app.get('io');
+
+  io.sockets.emit('client', 'Hello from server');
+
+  res.status(201).send('check socket');
+});
+
 module.exports = router;
