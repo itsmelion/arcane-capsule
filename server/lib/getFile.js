@@ -13,9 +13,7 @@ module.exports = function getFile(filename) {
       Key: filename,
       Bucket: process.env.BUCKET_NAME,
     }, (error, data) => {
-      if (error) {
-        return reject(error.message);
-      }
+      if (error) return reject(error.message);
       return resolve(data);
     });
   }));
