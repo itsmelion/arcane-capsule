@@ -17,8 +17,10 @@ router.post('/', async (req, res) => {
 
   if (status === 'completed') {
     // store on S3
-    const folder = Resumable.chunksFolder(resumableIdentifier);
-    const file = await Storage.saveStream(folder, resumableFilename, resumableType);
+    const folder = Resumable.chunkFolder(resumableIdentifier);
+    const file = await Storage.saveStream(
+      folder, resumableFilename, resumableType
+    );
     // Not implemented const encodedFile = await Encoder.submit(file);
     // Not implemented status = encodedFile;
     status = file;
@@ -28,10 +30,8 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/', (req, res) => {
-  Resumable.get(req, (status) => {
-    console.info('GET', status);
-    res.status(status ? 200 : 404);
-  });
+  const fileExist = Resumable.get(req.query);
+  res.status(fileExist ? 200 : 404).end();
 });
 
 router.get('/:identifier', (req, res) => {
