@@ -48,4 +48,3 @@ const port = isDev ? process.env.nodePort : (process.env.PORT || 80);
 server.listen(port, process.env.HOST, () => {
   console.info(`🖥️  ${process.env.appName} up at: ${process.env.HOST}:${port}`);
 });
-

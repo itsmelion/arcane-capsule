@@ -15,8 +15,7 @@ class FileUpload extends PureComponent {
     };
 
     this.r = new Resumable({
-      target: '/upload/resumable',
-      query: { path: 'uploads' },
+      target: '/upload',
       simultaneousUploads: 2,
       setChunkTypeFromFile: true,
       prioritizeFirstAndLastChunk: true,
