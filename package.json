@@ -13,7 +13,7 @@
     "deploy": "npm run build && npm run push"
   },
   "dependencies": {
-    "aws-sdk": "^2.304.0",
+    "aws-sdk": "^2.305.0",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",
