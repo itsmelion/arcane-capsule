@@ -1,3 +1,4 @@
+const fs = require('fs');
 const AWS = require('aws-sdk');
 
 const S3 = new AWS.S3({
@@ -7,11 +8,16 @@ const S3 = new AWS.S3({
 
 class Storage {
   constructor() {
-    this.concatFiles = folder => Buffer.concat(folder.map(item => item));
+    this.concatFiles = (folder) => {
+      const fileList = fs.readdirSync(folder);
+      const files = fileList.map(path => fs.readFileSync(`${folder}/${path}`));
+      return Buffer.concat(files);
+    };
   }
 
   saveStream(folder, originalName, fileType) {
     return new Promise((resolve, reject) => {
+      console.info('to send to S3');
       S3.putObject({
         ACL: 'public-read',
         Key: originalName,
@@ -24,7 +30,7 @@ class Storage {
           return reject(error.message);
         }
         console.info(`File uploaded: ${originalName}`);
-        return resolve(file.name);
+        return resolve(originalName);
       });
     });
   }

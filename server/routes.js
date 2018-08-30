@@ -34,10 +34,6 @@ router.get('/', (req, res) => {
   res.status(fileExist ? 200 : 404).end();
 });
 
-router.get('/:identifier', (req, res) => {
-  Resumable.write(req.params.identifier, res);
-});
-
 router.get('/ready', (req, res) => {
   const io = req.app.get('io');
   const response = {
