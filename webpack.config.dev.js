@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const { resolve } = require('path');
-const os = require('os');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const errorOverlayMiddleware = require('react-dev-utils-for-webpack4/errorOverlayMiddleware');
@@ -72,14 +71,6 @@ const config = merge(common, {
     before(app) {
       // This lets us open files from the runtime error overlay.
       app.use(errorOverlayMiddleware());
-    },
-    after() {
-      const externalIP = os.networkInterfaces().eth0[0].address;
-      console.info(`
-        ${process.env.appName} ready:
-        [local]: http://${process.env.HOST}:${process.env.PORT}
-        [external]: http://${externalIP}:${process.env.PORT}
-      `);
     },
     clientLogLevel: 'warning',
     noInfo: true,

@@ -44,16 +44,8 @@ class FileUpload extends PureComponent {
   }
 
   componentDidMount() {
-    this.r.assignDrop(document.getElementById('upload'));
+    this.r.assignDrop(document.getElementById('upload-label'));
     this.r.assignBrowse(document.getElementById('upload'));
-  }
-
-  pingSocket = () => {
-    fetch('/upload/ready');
-  }
-
-  download = () => {
-    fetch('/upload/resumable/');
   }
 
   render() {
@@ -64,16 +56,9 @@ class FileUpload extends PureComponent {
         <pre><h5>Progress: {upload.progress}</h5></pre>
         <br />
 
-        <input type="file" name="upload" id="upload" />
-
-        <br />
-        <button type="button" className="button" onClick={this.pingSocket}>
-          pingSocket
-        </button>
-
-        <button type="button" className="button" onClick={this.download}>
-          Download
-        </button>
+        <label htmlFor="upload" id="upload-label">
+          <input type="file" name="upload" id="upload" />
+        </label>
       </section>
     );
   }

@@ -5,3 +5,9 @@ html, body, :root {
   background-color: $space;
   color: $white7;
 }
+
+body {
+  background-image: url(../images/space.svg);
+  background-size: cover;
+  background-position: center center;
+}

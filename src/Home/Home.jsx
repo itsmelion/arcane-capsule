@@ -13,14 +13,6 @@ const Home = () => (
       <section flex="" column="" align="center">
         <FileUpload />
       </section>
-
-      <section flex="" column="" align="center">
-        Process
-      </section>
-
-      <section flex="" column="" align="center">
-        Result
-      </section>
     </div>
   </main>
 );
