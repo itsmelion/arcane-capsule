@@ -3,12 +3,12 @@ const express = require('express');
 
 const ResumableService = require('./handlers/Resumable');
 const StorageService = require('./handlers/Storage');
-// const EncoderService = require('./handlers/Encode');
+const EncoderService = require('./handlers/Encode');
 
 const router = express.Router();
 const Resumable = new ResumableService(resolve(__dirname, 'tmp'));
 const Storage = new StorageService();
-// const Encoder = new EncoderService();
+const Encoder = new EncoderService();
 
 // Handle uploads through Resumable.js
 router.post('/', async (req, res) => {
@@ -21,9 +21,8 @@ router.post('/', async (req, res) => {
     const file = await Storage.saveStream(
       folder, resumableFilename, resumableType
     );
-    // Not implemented const encodedFile = await Encoder.submit(file);
-    // Not implemented status = encodedFile;
-    status = file;
+    const encodedFile = await Encoder.submit(file);
+    status = encodedFile;
   }
 
   res.status(201).send(status);
