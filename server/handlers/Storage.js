@@ -30,7 +30,7 @@ class Storage {
           return reject(error.message);
         }
         console.info(`File uploaded: ${originalName}`);
-        return resolve(originalName);
+        return resolve(`${process.env.AWS_BUCKET}/originalName`);
       });
     });
   }

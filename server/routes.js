@@ -21,6 +21,7 @@ router.post('/', async (req, res) => {
     const file = await Storage.saveStream(
       folder, resumableFilename, resumableType
     );
+
     const encodedFile = await Encoder.submit(file);
     status = encodedFile;
   }

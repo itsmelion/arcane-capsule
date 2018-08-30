@@ -10,24 +10,19 @@ class Encode {
         'Zencoder-Api-Key': process.env.ENCODER_KEY,
       },
     };
-    this.basePayload = {
-      test: true,
-    };
   }
 
-  submit(file, payload = this.basePayload) {
-    const options = {
-      ...this.baseRequest,
-      data: JSON.stringify({
-        ...this.basePayload,
-        ...payload,
-        input: file,
-      }),
+  submit(file, payload, options = this.baseRequest) {
+    const data = {
+      test: true,
+      input: file,
     };
 
     console.info('Encode submit');
 
-    return axios.post(`${this.API}/jobs`, options);
+    return axios.post(`${this.API}/jobs`, data, options)
+      .then((res) => { console.info(res); return res; })
+      .catch(err => console.error(err));
   }
 }
 
