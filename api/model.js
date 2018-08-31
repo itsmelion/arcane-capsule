@@ -4,7 +4,7 @@ const shortid = require('shortid');
 
 mongoose.connect(process.env.DB_URL, { promiseLibrary: bluebird, useNewUrlParser: true });
 const schema = mongoose.Schema({
-  id: { type: String, default: shortid.generate },
+  _id: { type: String, default: shortid.generate },
 
   name: { type: String },
   status: { type: String },
@@ -14,7 +14,7 @@ const schema = mongoose.Schema({
 
   encoderId: { type: String },
   encoderOutputs: [{
-    id: { type: String },
+    _id: { type: String },
     url: { type: String },
     format: { type: String },
   }],

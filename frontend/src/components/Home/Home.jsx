@@ -1,5 +1,6 @@
 import React from 'react';
 import FileUpload from '../FileUpload/FileUpload';
+import FileList from '../FileList/FileList';
 import './Home.scss';
 
 const Home = () => (
@@ -12,6 +13,7 @@ const Home = () => (
     <div className="row nowrap">
       <section flex="" column="" align="center">
         <FileUpload />
+        <FileList />
       </section>
     </div>
   </main>

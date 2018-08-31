@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import './FileUpload.scss';
 import ReactS3Uploader from 'react-s3-uploader';
 import axios from 'axios';
-import io from 'socket.io-client';
+import Capsule from '../Capsule/Capsule';
 
 const { API_URL } = process.env;
 
@@ -12,15 +12,8 @@ class FileUpload extends PureComponent {
     this.state = {
       name: '',
       progress: 0,
-      status: 'Waiting',
+      status: 'waiting',
     };
-  }
-
-  componentDidMount() {
-    this.socket = io.connect(API_URL);
-    this.socket.on('client', ({ status }) => this.setState({
-      status,
-    }));
   }
 
   onUploadProgress = (progress, status, file) => {
@@ -28,20 +21,24 @@ class FileUpload extends PureComponent {
   }
 
   onUploadError = (error) => {
-    console.log('error', error);
+    console.warn(error);
+    this.setState({ status: 'error' });
   }
 
   onUploadFinish = ({ fileKey }, file) => {
     const fileName = file.name;
-    axios.post(`${API_URL}/files`, { fileName, fileKey });
+    axios.post(`${API_URL}/files`, { fileName, fileKey })
+      .then(({ id }) => {
+        this.listenWebhook(id);
+      });
   }
 
   render() {
     const { name, progress, status } = this.state;
     return (
       <section id="FileUpload">
-        <pre><h4>Name: {name}</h4></pre>
-        <pre><h5>Progress: {progress}% ({status})</h5></pre>
+        <Capsule name={name} status={status} />
+        <pre><h5>Progress: {progress}%</h5></pre>
 
         <ReactS3Uploader
           id="upload"

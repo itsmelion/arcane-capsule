@@ -22,9 +22,36 @@ const bucket = process.env.BUCKET_NAME;
 const region = process.env.AWS_REGION;
 app.use('/s3', s3Router({ bucket, region, ACL: 'public-read' }));
 
+const { BUCKET_URL } = process.env;
+
+const outputParams = (id, name) => [
+  {
+    label: 'mp4',
+    url: `${BUCKET_URL}/${id}/${name}.mp4`,
+    public: true,
+    h264_profile: 'high',
+    audio_bitrate: 160,
+    max_video_bitrate: 5000,
+    h264_profile: 'high',
+    max_frame_rate: 30,
+  },
+  {
+    url: `${BUCKET_URL}/${id}/${name}.webm`,
+    label: 'webm',
+    format: 'webm',
+    public: true,
+  },
+  {
+    url: `${BUCKET_URL}/${id}/${name}.ogg`,
+    label: 'ogg',
+    format: 'ogg',
+    public: true,
+  },
+];
+
 app.get('/files', async (req, res) => {
   const files = await File.find().lean();
-  return res.json({ files });
+  return res.json(files);
 });
 
 app.post('/files', async (req, res) => {
@@ -35,7 +62,7 @@ app.post('/files', async (req, res) => {
   const file = await File.create({
     name: body.fileName,
     status: 'uploaded',
-    rawFileUrl: `${process.env.BUCKET_URL}/${body.fileKey}`,
+    rawFileUrl: `${BUCKET_URL}/${body.fileKey}`,
     rawFilePath: body.fileKey,
   });
 
@@ -43,13 +70,16 @@ app.post('/files', async (req, res) => {
 
   const input = file.rawFileUrl;
   const notifications = [{ url: `${process.env.PUBLIC_URL}/files/${file._id}/encoding` }];
-  const encodeJob = await zencoder.Job.create({ input, notifications }).then(({ data }) => data);
+
+  const encodeJob = await zencoder.Job
+    .create({ input, notifications, outputs: outputParams(file._id, file.name) })
+    .then(({ data }) => data);
 
   log.debug('transcoding started', encodeJob);
 
   file.set({ encoderId: encodeJob.id, status: 'encoding' }).save();
 
-  return res.json({ success: true });
+  return res.json({ id: file._id, status: 'encoding' });
 });
 
 app.post('/files/:fileId/encoding', async (req, res) => {
@@ -64,13 +94,28 @@ app.post('/files/:fileId/encoding', async (req, res) => {
   const parsedOutputs = outputs.map(output => ({
     _id: output.id,
     url: output.url,
-    format: output.format,
+    format: output.label,
   }));
 
   file.set({ encoderOutputs: parsedOutputs, status: 'completed' }).save();
 
-  return res.json({ success: true });
+  const { _id } = file.toObject();
+
+  socket.sockets.emit(_id, 'ready');
+
+  return res.json({ status: 'ready' });
 });
+
+app.get('/files/:fileId', async (req, res) => {
+  const { fileId } = req.params;
+
+
+  const file = await File.findById(fileId).lean()
+    .catch(e => log.error('Not found file', e));
+
+  return res.json(file);
+});
+
 
 server.listen(process.env.PORT, process.env.HOST, () => {
   log.info(`🖥️  ArcaneCapsule API up at: ${process.env.HOST}:${process.env.PORT}`);
