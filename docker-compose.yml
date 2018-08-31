@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  db:
+    image: mongo:4
+    ports:
+      - '27018:27017'
+
+  api:
+    build:
+      context: ./api
+      args:
+        - NODE_ENV=development
+        - PORT=1666
+    command: nodemon
+    env_file:
+      - ./api/.env
+    ports:
+      - 1666:1666
+    volumes:
+      - ./api:/opt/app
+    links:
+      - db
+    depends_on:
+      - db
