@@ -10,11 +10,7 @@ const { resolve } = require('path');
 require('dotenv').config();
 
 const common = {
-  entry: [
-    require.resolve('react-dev-utils-for-webpack4/webpackHotDevClient'),
-    `webpack-hot-middleware/client?http://${process.env.HOST}:${process.env.PORT}/`,
-    './src/index.jsx',
-  ],
+  entry: ['./src/index.jsx'],
   output: {
     // https://alia.ams3.digitaloceanspaces.com/ change this if proxy
     publicPath: '/',

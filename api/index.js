@@ -1,4 +1,5 @@
 require('dotenv').config(); // Expose environment variables on this document
+const http = require('http');
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -9,9 +10,9 @@ const log = require('./log');
 const File = require('./model');
 
 const app = express();
+const server = http.Server(app);
 const socket = io(server);
 const zencoder = Zencoder();
-
 
 app.use(cors()); // allow cors
 app.use(bodyParser.json({ limit: '5mb' }));
@@ -71,6 +72,6 @@ app.post('/files/:fileId/encoding', async (req, res) => {
   return res.json({ success: true });
 });
 
-app.listen(process.env.PORT, process.env.HOST, () => {
+server.listen(process.env.PORT, process.env.HOST, () => {
   log.info(`🖥️  ArcaneCapsule API up at: ${process.env.HOST}:${process.env.PORT}`);
 });

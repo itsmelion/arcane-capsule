@@ -1,15 +1,15 @@
 import React from 'react';
+import FileUpload from '../FileUpload/FileUpload';
 import './Home.scss';
-import FileUpload from '../components/FileUpload/FileUpload';
 
 const Home = () => (
   <main flex="" id="Home" align="center" fill="">
     <header>
-      <h1>{process.env.appName}</h1>
+      <h1>{process.env.APP_NAME}</h1>
       <sub>A video converter from outta space</sub>
     </header>
 
-    <div className="row nowrap process">
+    <div className="row nowrap">
       <section flex="" column="" align="center">
         <FileUpload />
       </section>
