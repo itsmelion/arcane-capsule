@@ -6,15 +6,19 @@ import Capsule from '../Capsule/Capsule';
 import uploadIcon from './icons8-upload-to-cloud-80.png';
 
 const { API_URL } = process.env;
+const capsuleInitialState = {
+  name: '',
+  progress: 0,
+  status: 'waiting',
+  open: false,
+};
 
 class FileUpload extends PureComponent {
   constructor(props) {
     super(props);
+    this.toggleList = props.toggleList;
     this.state = {
-      name: '',
-      progress: 0,
-      status: 'waiting',
-      open: false,
+      ...capsuleInitialState,
     };
   }
 
@@ -34,7 +38,8 @@ class FileUpload extends PureComponent {
     axios.post(`${API_URL}/files`, { fileName, fileKey })
       .then(({ id }) => {
         this.listenWebhook(id);
-        this.setState({ open: false });
+        this.setState({ ...capsuleInitialState });
+        this.toggleList(true);
       });
   }
 
@@ -46,13 +51,13 @@ class FileUpload extends PureComponent {
     return (
       <section id="FileUpload" flex="auto" row="" align="center center">
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-        <label htmlFor="upload" id="upload-label">
+        <label htmlFor="upload" id="upload-label" hidden={open}>
           <img src={uploadIcon} alt="Upload file icon" />
 
           <ReactS3Uploader
-            hidden
             id="upload"
             name="upload"
+            hidden
             signingUrl="/s3/sign"
             signingUrlMethod="GET"
             s3path="raw/"
@@ -60,6 +65,7 @@ class FileUpload extends PureComponent {
             onError={this.onUploadError}
             onFinish={this.onUploadFinish}
             server={API_URL}
+            disabled={open}
           />
         </label>
 

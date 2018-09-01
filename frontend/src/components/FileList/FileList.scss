@@ -3,4 +3,9 @@
 #FileList {
   background-color: white;
   color: $black8;
+  overflow: hidden;
+
+  &.true { //open
+    max-height: 100vh;
+  }
 }
