@@ -17,7 +17,6 @@
     "react-s3-uploader": "^4.8.0"
   },
   "devDependencies": {
-    "dotenv": "latest",
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/plugin-proposal-function-bind": "^7.0.0",
@@ -27,11 +26,12 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.0.0",
-    "babel-loader": "^8.0.0",
+    "babel-loader": "^8.0.1",
     "clean-css-loader": "^1.0.1",
     "clean-webpack-plugin": "latest",
     "compression-webpack-plugin": "^1.1.12",
     "css-loader": "^1.0.0",
+    "dotenv": "latest",
     "dotenv-webpack": ">=1.5.7",
     "file-loader": "^2.0.0",
     "html-loader": "latest",

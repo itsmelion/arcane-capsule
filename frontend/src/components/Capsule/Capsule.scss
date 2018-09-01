@@ -1,0 +1,66 @@
+@import 'vars';
+
+.Capsule {
+  color: $space;
+  padding: 1em 0;
+  user-select: none;
+  font-size: 1rem;
+  box-sizing: border-box;
+  border-radius: 1000pt;
+
+  .display {
+    padding: .8em;
+    box-sizing: border-box;
+    white-space: nowrap;
+
+    h5, h6 {
+      margin: 1pt;
+      background: $space;
+      border-radius: 3pt;
+      padding: .8em 1.6em;
+      color: lighten($primary, 8%);
+      text-shadow: 0 0 3pt $primary;
+      box-shadow: 0 0 15pt 0 inset $primary;
+      font-family: 'Press Start 2P', sans-serif;
+      animation: shadowPulse 1.8s alternate infinite;
+    }
+  }
+}
+
+.capsule-arms {
+  background-image: url(./capsule-arm-left.svg), url(./capsule-arm-right.svg);
+  background-position: left, right;
+  background-repeat: no-repeat;
+  background-size: contain;
+  min-width: 11em;
+  padding: 0 5em;
+}
+
+.capsule-body {
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-size: contain;
+  transition: max-width 1s ease-in-out;
+  background-repeat: repeat-x;
+  background-image: url(./capsule-body.svg);
+  padding: 1em 0;
+  max-width: 0;
+
+  &.true {
+    max-width: 2000pt;
+  }
+}
+
+@keyframes shadowPulse {
+  from {
+    text-shadow: 0 0 5pt $primary;
+    box-shadow: 0 0 15pt 0 inset $primary;
+  }
+  to {
+    text-shadow: 0 0 5pt transparent;
+    box-shadow: 0 0 20pt 0 inset transparent;
+  }
+}

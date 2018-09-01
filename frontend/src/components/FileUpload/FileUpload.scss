@@ -1,10 +1,23 @@
 @import 'vars';
 
-#upload {
-  display: block;
+#FileUpload {
+  position: relative;
+  margin: 2rem auto 6rem auto;
+}
+
+#upload-label {
+  top: 50%;
+  left: 50%;
   margin: auto;
-  width: 80%;
-  background-color: rgba($primary, .2);
   padding: 2rem;
-  border-radius: 1rem;
+  display: block;
+  position: absolute;
+  border-radius: 1000pt;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+
+  &:hover + .Capsule {
+    transition: box-shadow .15s;
+    box-shadow: 0 0 25pt 0 $primary;
+  }
 }
