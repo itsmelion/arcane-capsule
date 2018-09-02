@@ -13,7 +13,6 @@
     "flamework": "^3.0.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-s3-uploader": "^4.8.0",
     "socket.io-client": "^2.1.1"

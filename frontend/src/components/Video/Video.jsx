@@ -13,9 +13,10 @@ class Video extends PureComponent {
   }
 
   componentWillMount() {
-    axios.get(`${API_URL}/files/:fileId`)
-      .then(({ data }) => this.setState(({
-        outputs: data,
+    const { match } = this.props;
+    axios.get(`${API_URL}/files/${match.params.id}`)
+      .then(({ data: { encoderOutputs } }) => this.setState(({
+        outputs: encoderOutputs,
       })));
   }
 
@@ -23,9 +24,17 @@ class Video extends PureComponent {
     const { outputs } = this.state;
 
     return (
-      <main id="Video">
-        <video> {/* eslint-disable-line jsx-a11y/media-has-caption */}
-          <source src={outputs.url} />
+      <main flex="" fill="" id="Video">
+        <video controls autoPlay> {/* eslint-disable-line jsx-a11y/media-has-caption */}
+          {outputs && outputs.length && outputs.map(({ _id, url, format }) => (
+            <source
+              key={_id}
+              src={url}
+              type={`video/${format}`}
+            />
+          ))}
+
+          😦 Your browser does not support the video tag. 🚫 📹
         </video>
       </main>
     );

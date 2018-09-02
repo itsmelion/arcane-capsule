@@ -7,15 +7,16 @@
 
 #upload-label {
   top: 50%;
-  left: 50%;
   margin: auto;
-  padding: 2rem;
+  padding: 3.65rem;
+  height: 11rem;
+  width: 100%;
   display: block;
   position: absolute;
   border-radius: 1000pt;
-  transform: translate(-50%, -50%);
+  transform: translate(0, -50%);
   cursor: pointer;
-  img { width: 2rem; }
+  img { width: 100%; }
 
   &:hover + .Capsule {
     transition: box-shadow .15s;

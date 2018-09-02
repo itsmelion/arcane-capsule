@@ -1,8 +1,6 @@
 import React from 'react';
 import './Capsule.scss';
 
-const truncate = (name, chars) => name.length > chars && `${name.slice(chars)}...`;
-
 const Capsule = ({
   name, status, progress, open,
 }) => (
@@ -10,11 +8,10 @@ const Capsule = ({
     <div className={`row capsule-body ${open}`}>
 
       <div className={`display ${status}`}>
-        <h5>{truncate(name, 25)}: {status}</h5>
-        <h6>{progress}%</h6>
-
-        {status === 'ready' && 'play'}
+        <h5>{name}</h5>
+        <h6>{(progress > 0 && progress < 100) && `${progress}%`} {status}</h6>
       </div>
+
     </div>
   </div>
 );

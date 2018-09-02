@@ -13,6 +13,8 @@ const capsuleInitialState = {
   open: false,
 };
 
+const truncate = (name, chars) => name.length > chars && `${name.slice(0, chars)}...`;
+
 class FileUpload extends PureComponent {
   constructor(props) {
     super(props);
@@ -36,8 +38,7 @@ class FileUpload extends PureComponent {
   onUploadFinish = ({ fileKey }, file) => {
     const fileName = file.name;
     axios.post(`${API_URL}/files`, { fileName, fileKey })
-      .then(({ id }) => {
-        this.listenWebhook(id);
+      .then(() => {
         this.setState({ ...capsuleInitialState });
         this.toggleList(true);
       });
@@ -69,7 +70,12 @@ class FileUpload extends PureComponent {
           />
         </label>
 
-        <Capsule name={name} status={status} progress={progress} open={open} />
+        <Capsule
+          name={truncate(name, 21)}
+          status={status}
+          progress={progress}
+          open={open}
+        />
       </section>
     );
   }
