@@ -1,0 +1,34 @@
+@import 'vars';
+
+.VideoListItem {
+  border-bottom: .5pt solid $black1;
+  padding: .6em 2em;
+
+
+  .status {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: start;
+    align-items: center;
+
+    img { width: 1.7em }
+    p { font-weight: 600; margin: .4em }
+    &.encode { color: rgb(212, 223, 0) }
+    &.play { color: rgb(0, 156, 223) }
+    &.error { color: rgb(244, 49, 6) }
+  }
+}
+
+.encode img {
+  transform: rotate(0);
+  animation: spin 2s alternate infinite;
+  animation-delay: .5s;
+}
+
+
+@keyframes spin {
+  from { transform: rotate(0); }
+  to { transform: rotate(360deg); }
+}

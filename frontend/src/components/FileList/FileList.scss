@@ -1,11 +1,20 @@
-@import '~flamework/src/vars';
+@import 'vars';
 
 #FileList {
-  background-color: white;
+  max-height: 0;
   color: $black8;
-  overflow: hidden;
+  background-color: white;
+  transition: max-height .2s ease-in-out;
+  overflow-y: auto;
 
   &.true { //open
     max-height: 100vh;
   }
+}
+
+.list-header {
+  padding: .8rem 1rem;
+  margin-bottom: 1rem;
+  background-color: lighten($primary, 35%);
+  color: $primary;
 }

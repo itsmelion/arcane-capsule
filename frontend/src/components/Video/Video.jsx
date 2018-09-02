@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import axios from 'axios';
 import './Video.scss';
+import { Link } from 'react-router-dom';
 
 const { API_URL } = process.env;
 
@@ -25,6 +26,15 @@ class Video extends PureComponent {
 
     return (
       <main flex="" fill="" id="Video">
+        <nav contain="">
+          <Link
+            to="/"
+            className="button list-button"
+          >
+            Go back
+          </Link>
+        </nav>
+
         <video controls autoPlay> {/* eslint-disable-line jsx-a11y/media-has-caption */}
           {outputs && outputs.length && outputs.map(({ _id, url, format }) => (
             <source

@@ -20,21 +20,21 @@ class Home extends PureComponent {
     this.fetchList();
   }
 
-  toggleList = (override) => {
-    this.setState(({ openList }) => {
-      const isOverride = typeof override !== 'undefined';
-      return ({
-        openList: (isOverride && override) || !openList,
-      });
-    });
-  };
-
   fetchList = () => {
     axios.get(`${API_URL}/files`)
       .then(({ data }) => this.setState(({ files }) => ({
         files: [...files, ...data],
       })));
   };
+
+  toggleList(override) {
+    this.setState(({ openList }) => {
+      const isOverride = typeof override !== 'undefined';
+      return ({
+        openList: (isOverride && override) || !openList,
+      });
+    });
+  }
 
   render() {
     const { openList, files } = this.state;
@@ -49,6 +49,15 @@ class Home extends PureComponent {
         <section flex="grow" className="column">
           <div flex="" className="contain column" align="between">
             <FileUpload flex="none" toggleList={this.toggleList} />
+
+            <button
+              type="button"
+              className="button list-button"
+              onClick={() => this.toggleList()}
+            >
+              {openList ? 'Hide' : 'Show' } List
+            </button>
+
             <FileList flex="initial" files={files} open={openList} />
           </div>
         </section>

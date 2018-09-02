@@ -3,7 +3,7 @@ const http = require('http');
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const io = require('socket.io');
+const socketIO = require('socket.io');
 const s3Router = require('react-s3-uploader/s3router');
 const Zencoder = require('zencoder');
 const log = require('./log');
@@ -11,7 +11,7 @@ const File = require('./model');
 
 const app = express();
 const server = http.Server(app);
-const socket = io(server);
+const io = socketIO(server);
 const zencoder = Zencoder();
 
 app.use(cors()); // allow cors
@@ -57,7 +57,7 @@ app.get('/files', async (req, res) => {
 app.post('/files', async (req, res) => {
   const { body } = req;
 
-  log.debug('new file uploaded', body);
+  log.debug('new file uploaded');
 
   const file = await File.create({
     name: body.fileName,
@@ -66,7 +66,7 @@ app.post('/files', async (req, res) => {
     rawFilePath: body.fileKey,
   });
 
-  log.debug('uploaded file registered', file);
+  log.debug('uploaded file registered');
 
   const input = file.rawFileUrl;
   const notifications = [{ url: `${process.env.PUBLIC_URL}/files/${file._id}/encoding` }];
@@ -75,7 +75,7 @@ app.post('/files', async (req, res) => {
     .create({ input, notifications, outputs: outputParams(file._id, file.name) })
     .then(({ data }) => data);
 
-  log.debug('transcoding started', encodeJob);
+  log.debug('transcoding started');
 
   file.set({ encoderId: encodeJob.id, status: 'encoding' }).save();
 
@@ -84,10 +84,9 @@ app.post('/files', async (req, res) => {
 
 app.post('/files/:fileId/encoding', async (req, res) => {
   const { fileId } = req.params;
-  const { job, outputs, input } = req.body;
+  const { outputs } = req.body;
 
-  log.debug('encoding notification for', fileId);
-  log.debug('details', job, outputs, input);
+  log.debug('Webhook notification from Zencoder');
 
   const file = await File.findOne({ _id: fileId });
 
@@ -98,12 +97,12 @@ app.post('/files/:fileId/encoding', async (req, res) => {
   }));
 
   file.set({ encoderOutputs: parsedOutputs, status: 'completed' }).save();
-
   const { _id } = file.toObject();
 
-  socket.sockets.emit(_id, 'ready');
+  io.emit(_id, 'completed');
 
-  return res.json({ status: 'ready' });
+  log.debug('Videos converted and saved with success ✅');
+  return res.json({ status: 'completed' });
 });
 
 app.get('/files/:fileId', async (req, res) => {
