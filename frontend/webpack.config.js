@@ -13,7 +13,6 @@ const config = merge(common, {
   mode: 'production',
   output: {
     filename: '[name].[hash].js',
-    chunkFilename: '[name].[hash].js',
   },
   devtool: 'none',
   optimization: {
@@ -43,13 +42,13 @@ const config = merge(common, {
         test: /\.s[ac]ss$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'clean-css-loader',
           {
             loader: 'css-loader',
             options: {
               sourceMap: true,
             },
           },
+          'clean-css-loader',
           'postcss-loader',
           'resolve-url-loader',
           {
@@ -69,8 +68,7 @@ const config = merge(common, {
       'process.env.NODE_ENV': JSON.stringify('production'),
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[hash].css',
-      chunkFilename: '[id].[hash].css',
+      filename: '[name].[contenthash].css',
     }),
     new CompressionWebpackPlugin({
       cache: true,

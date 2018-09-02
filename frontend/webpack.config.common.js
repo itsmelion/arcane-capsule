@@ -18,17 +18,6 @@ const common = {
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
   },
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all',
-        },
-      },
-    },
-  },
   plugins: [
     new webpack.WatchIgnorePlugin([
       /\.d\.ts$/,
