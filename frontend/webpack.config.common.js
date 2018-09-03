@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const eslintFormatter = require('react-dev-utils-for-webpack4/eslintFormatter');
-const Dotenv = require('dotenv-webpack');
 const { resolve } = require('path');
 
 require('dotenv').config();
@@ -23,7 +22,6 @@ const common = {
       /\.d\.ts$/,
       /\.DS_Store$/,
     ]),
-    new Dotenv(),
     new CleanWebpackPlugin('dist', {}),
     new HtmlWebpackPlugin({
       template: './src/index.html',

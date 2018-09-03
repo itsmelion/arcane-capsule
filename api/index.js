@@ -1,4 +1,4 @@
-require('dotenv').config(); // Expose environment variables on this document
+require('dotenv-extended').load(); // Expose environment variables on this document
 const http = require('http');
 const express = require('express');
 const cors = require('cors');
@@ -15,6 +15,12 @@ const io = socketIO(server);
 const zencoder = Zencoder();
 
 app.use(cors()); // allow cors
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header("Access-Control-Allow-Headers", "Origin","X-Requested-With", "Content-Type", "Accept");
+  next();
+});
 app.use(bodyParser.json({ limit: '5mb' }));
 app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
 

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "./index.js",
   "scripts": {
-    "deploy": "rsync -az ./ lion@alia.ml:/opt/arcane_capsule/api --progress --itemize-changes"
+    "deploy": "rsync -az --exclude 'node_modules*' --exclude '.env' ./ lion@alia.ml:/opt/arcane_capsule/api --progress --itemize-changes"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -11,19 +11,20 @@
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
     "dotenv": "6.0.0",
+    "dotenv-extended": "^2.2.0",
     "express": "4.16.3",
     "loglevel": "^1.6.1",
     "mongoose": "^5.2.12",
-    "shortid":"^2.2.13",
-    "react-s3-uploader":"^4.8.0",
-    "zencoder": "^2.0.1",
-    "socket.io": "^2.1.1"
+    "react-s3-uploader": "^4.8.0",
+    "shortid": "^2.2.13",
+    "socket.io": "^2.1.1",
+    "zencoder": "^2.0.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"
   },
   "optionalDependencies": {
-    "eslint": "^5.4.0",
+    "eslint": "^5.5.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0"
   },

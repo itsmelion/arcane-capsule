@@ -1,3 +1,6 @@
+$mobile-breakpoint:   69rem; // ~780px
+$mobile:  "screen and (max-width: #{$mobile-breakpoint})";
+
 $deepBlue: #222028;
 $space: $deepBlue;
 

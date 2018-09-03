@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 const { resolve } = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -64,6 +65,12 @@ const config = merge(common, {
 
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
+    new Dotenv({
+      path: './.env.production', // load this now instead of the ones in '.env'
+      safe: true, // load '.env.example' to verify the '.env' variables are all set.
+      systemvars: false, // load all the predefined 'process.env'
+      silent: false, // hide any errors
+    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
     }),

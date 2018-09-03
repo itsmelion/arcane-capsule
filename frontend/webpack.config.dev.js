@@ -2,6 +2,7 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const Dotenv = require('dotenv-webpack');
 const errorOverlayMiddleware = require('react-dev-utils-for-webpack4/errorOverlayMiddleware');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const common = require('./webpack.config.common');
@@ -44,6 +45,7 @@ const config = merge(common, {
   },
 
   plugins: [
+    new Dotenv(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
     }),

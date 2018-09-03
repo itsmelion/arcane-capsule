@@ -7,11 +7,17 @@
   font-size: 1rem;
   box-sizing: border-box;
   border-radius: 1000pt;
+  @media #{$mobile} {
+    font-size: .8rem;
+  }
 
   .display {
     padding: .8em;
     box-sizing: border-box;
     white-space: nowrap;
+    @media #{$mobile} {
+      white-space: normal;
+    }
 
     h5, h6 {
       margin: 1pt;
