@@ -11,7 +11,7 @@ const FileList = ({ files = [], open = false }) => (
     ))}
 
     {files.length === 0 && (
-      <h2>Nothing Here sir, <sub>Try to upload some stuff first</sub></h2>
+      <h2 className="mv2">Nothing Here sir, <sub>Try to upload some stuff first</sub></h2>
     )}
   </ul>
 );

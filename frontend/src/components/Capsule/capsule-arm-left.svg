@@ -4,7 +4,7 @@
 	 viewBox="0 0 270 512" enable-background="new 0 0 270 512" xml:space="preserve">
 <g id="Capsule-L">
 	<defs>
-		<rect id="SVGID_1_" x="-4" y="-10" width="274" height="531"/>
+		<rect id="SVGID_1_" x="0" y="-10" width="274" height="531"/>
 	</defs>
 	<clipPath id="SVGID_2_">
 		<use xlink:href="#SVGID_1_"  overflow="visible"/>
@@ -17,46 +17,15 @@
 			<circle fill="#D9C7F2" cx="262" cy="256" r="234"/>
 		</g>
 		<g>
-			
-				<radialGradient id="SVGID_3_" cx="262.4479" cy="256.3187" r="214.6501" gradientTransform="matrix(0.9993 0 0 0.9993 0.2356 0.3605)" gradientUnits="userSpaceOnUse">
-				<stop  offset="0" style="stop-color:#FFFFFF"/>
-				<stop  offset="0.5281" style="stop-color:#FEFDFF"/>
-				<stop  offset="0.7321" style="stop-color:#FAF6FF"/>
-				<stop  offset="0.8795" style="stop-color:#F2EAFF"/>
-				<stop  offset="1" style="stop-color:#E8D9FF"/>
-			</radialGradient>
-			<circle fill="url(#SVGID_3_)" cx="262.5" cy="256.5" r="214.5"/>
+      <radialGradient id="SVGID_3_" cx="262.4479" cy="256.3187" r="214.6501" gradientTransform="matrix(0.9993 0 0 0.9993 0.2356 0.3605)" gradientUnits="userSpaceOnUse">
+      <stop  offset="0" style="stop-color:#FFFFFF"/>
+      <stop  offset="0.5281" style="stop-color:#FEFDFF"/>
+      <stop  offset="0.7321" style="stop-color:#FAF6FF"/>
+      <stop  offset="0.8795" style="stop-color:#F2EAFF"/>
+      <stop  offset="1" style="stop-color:#E8D9FF"/>
+    </radialGradient>
+    <circle fill="url(#SVGID_3_)" cx="262.5" cy="256.5" r="214.5"/>
 		</g>
 	</g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
 </g>
 </svg>

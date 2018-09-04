@@ -2,18 +2,21 @@
 
 .Capsule {
   color: $space;
-  padding: 1em 0;
   user-select: none;
-  font-size: 1rem;
   box-sizing: border-box;
   border-radius: 1000pt;
+  min-width: 6rem;
+  max-width: 100%;
+  background-image: url(./capsule-arm-left.svg), url(./capsule-arm-right.svg), url(./capsule-body.svg);
+  background-position: left, right;
+  background-repeat: no-repeat, no-repeat, repeat-x;
+  background-size: auto 100%, auto 100%, auto 100%;
+  padding: 1em 3em;
   @media #{$mobile} {
-    font-size: .8rem;
+    padding: 1em 1.5em;
   }
 
   .display {
-    padding: .8em;
-    box-sizing: border-box;
     white-space: nowrap;
     @media #{$mobile} {
       white-space: normal;
@@ -22,42 +25,28 @@
     h5, h6 {
       margin: 1pt;
       background: $space;
-      border-radius: 3pt;
-      padding: .8em 1.6em;
+      padding: .5em 1.2em;
+      border-radius: 1000pt;
       color: lighten($primary, 8%);
       text-shadow: 0 0 3pt $primary;
       box-shadow: 0 0 15pt 0 inset $primary;
       font-family: 'Press Start 2P', sans-serif;
       animation: shadowPulse 1.8s alternate infinite;
     }
+
+    h5 { font-size: 1.1em }
+    h6 { font-size: 1em }
   }
-}
 
-.capsule-arms {
-  background-image: url(./capsule-arm-left.svg), url(./capsule-arm-right.svg);
-  background-position: left, right;
-  background-repeat: no-repeat;
-  background-size: contain;
-  min-width: 11em;
-  padding: 0 5em;
-}
-
-.capsule-body {
-  opacity: 1;
-  width: 100%;
-  overflow: hidden;
-  box-sizing: border-box;
-  background-size: contain;
-  transition: max-width 1s ease-in-out;
-  background-repeat: repeat-x;
-  background-image: url(./capsule-body.svg);
-  padding: 1em 0;
-  height: 10.6em;
-  max-width: 0;
-
-  &.true {
-    max-width: 2000pt;
+  .capsule-body {
+    overflow: hidden;
+    opacity: 0;
+    width: 100%;
+    max-width: 0;
+    transition: max-width 1s ease-in-out, opacity .7s;
   }
+
+  &.true { .capsule-body { max-width: none; opacity: 1; } }
 }
 
 @keyframes shadowPulse {

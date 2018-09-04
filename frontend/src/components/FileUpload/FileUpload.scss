@@ -2,21 +2,21 @@
 
 #FileUpload {
   position: relative;
-  margin: 2rem auto 6rem auto;
+  font-size: 1.8rem;
+  @media #{$mobile} {
+    font-size: 1.15rem;
+  }
 }
 
 #upload-label {
   top: 50%;
   margin: auto;
-  padding: 3.65rem;
-  height: 11rem;
-  width: 100%;
   display: block;
   position: absolute;
   border-radius: 1000pt;
   transform: translate(0, -50%);
   cursor: pointer;
-  img { width: 100%; }
+  img { width: auto; height: 2.2em; }
 
   &:hover + .Capsule {
     transition: box-shadow .15s;
