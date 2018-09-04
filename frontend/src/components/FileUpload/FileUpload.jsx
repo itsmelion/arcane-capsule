@@ -10,7 +10,7 @@ const capsuleInitialState = {
   name: '',
   progress: 0,
   status: 'waiting',
-  open: true,
+  open: false,
 };
 
 const truncate = (name, chars) => name.length > chars && `${name.slice(0, chars)}...`;
