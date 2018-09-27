@@ -1,92 +1,91 @@
 <!DOCTYPE html>
 <html lang="en-UK">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="content-language" content="en-UK">
-    <meta name="theme-color" content="#222028" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-status-bar-style" content="black">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="content-language" content="en-UK">
+  <meta name="theme-color" content="#222028" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-status-bar-style" content="black">
 
-    <link rel="alternate" hreflang="en-us"
-        href="//capsule.alia.ml?lang=en" />
-    <link rel="alternate" hreflang="pt-br"
-          href="//capsule.alia.ml?lang=pt" />
-    <link rel="alternate" hreflang="he"
-          href="//capsule.alia.ml?lang=he" />
-    <link rel="alternate" hreflang="x-default"
-          href="//capsule.alia.ml" />
+  <link rel="alternate" hreflang="en-us"
+      href="//arcane.capsule.gq?lang=en" />
+  <link rel="alternate" hreflang="pt-br"
+        href="//arcane.capsule.gq?lang=pt" />
+  <link rel="alternate" hreflang="he"
+        href="//arcane.capsule.gq?lang=he" />
+  <link rel="alternate" hreflang="x-default"
+        href="//arcane.capsule.gq" />
 
-    <meta name="reply-to" content="christhopherleao@icloud.com">
-    <meta name="author" content="Christhopher Lion">
+  <meta name="reply-to" content="christhopherleao@icloud.com">
+  <meta name="author" content="Christhopher Lion">
 
-    <meta name="keywords" content="Alia web, alia, alia mobile, mobile apps, apps, ΛLIΛ, belo horizonte, brazil, brasil, software, portfolio, resume, developer, lion, frontend, design, arcane, capsule, video, converter" />
-    <meta name="description" content="A video converter to make extraneous video files extentions reproducible by web browsers." />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="en_UK">
-    <meta property="og:locale:alternate" content="pt-BR" />
-    <meta property="og:locale:alternate" content="he" />
-    <meta property="fb:app_id" content="{{facebookAppId}}">
-    <meta property="og:site_name" content="Arcane Capsule " />
-    <meta property="og:title" content="Arcane Capsule | ΛLIΛ" />
-    <meta property="og:description" content="A video converter to make extraneous video files extentions reproducible by web browsers." />
-    <meta property="og:url" content="capsule.alia.ml" />
-    <meta property="twitter:title" content="ArcaneCapsule - Video Converter" />
+  <meta name="keywords" content="Alia web, alia, alia mobile, mobile apps, apps, ΛLIΛ, belo horizonte, brazil, brasil, software, portfolio, resume, developer, lion, frontend, design, arcane, capsule, video, converter" />
+  <meta name="description" content="A video converter to make extraneous video files extentions reproducible by web browsers." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_UK">
+  <meta property="og:locale:alternate" content="pt-BR" />
+  <meta property="og:locale:alternate" content="he" />
+  <meta property="og:site_name" content="Arcane Capsule " />
+  <meta property="og:title" content="Arcane Capsule | ΛLIΛ" />
+  <meta property="og:description" content="A video converter to make extraneous video files extentions reproducible by web browsers." />
+  <meta property="og:url" content="arcane.capsule.gq" />
+  <meta property="twitter:title" content="ArcaneCapsule - Video Converter" />
 
-    <link
-      rel="preload"
-      as="style"
-      async
-      href="https://fonts.googleapis.com/css?family=Exo:300,600,800"
-      onload="this.rel='stylesheet'"
-    />
-    <link
-      rel="preload"
-      as="style"
-      async
-      href="https://fonts.googleapis.com/css?family=Press+Start+2P"
-      onload="this.rel='stylesheet'"
-    />
+  <link
+    rel="preload"
+    as="style"
+    async
+    href="https://fonts.googleapis.com/css?family=Exo:300,600,800"
+    onload="this.rel='stylesheet'"
+  />
+  <link
+    rel="preload"
+    as="style"
+    async
+    href="https://fonts.googleapis.com/css?family=Press+Start+2P"
+    onload="this.rel='stylesheet'"
+  />
 
-    <base href="/">
+  <base href="/">
 
-    <style>
-      #loading {
-        opacity: 0;
-        transition: opacity .5s;
-        position: fixed;
-        height: 100%;
-        width: 100%;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgb(26, 29, 52);
-        z-index: 100;
-        pointer-events: none;
-      }
+  <style>
+    #loading {
+      opacity: 0;
+      transition: opacity .5s;
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgb(26, 29, 52);
+      z-index: 100;
+      pointer-events: none;
+    }
 
-      #loading h1 {
-        color: #EEE;
-        position: fixed;
-        top: 50%;
-        width: 100%;
-        text-align: center;
-        transform: translate(0, -50%);
-      }
+    #loading h1 {
+      color: #EEE;
+      position: fixed;
+      top: 50%;
+      width: 100%;
+      text-align: center;
+      transform: translate(0, -50%);
+    }
 
-      #root:empty + #loading {
-        opacity: 1;
-      }
-    </style>
+    #root:empty + #loading {
+      opacity: 1;
+    }
+  </style>
 
-    <title>Λrcane Capsule</title>
-  </head>
-  <body>
-    <div id="root" fill></div>
+  <title>Λrcane Capsule</title>
+</head>
+<body>
+  <div id="root" fill></div>
 
-    <div id="loading">
-        <h1>Loading... <br>Carregando</h1>
-    </div>
-  </body>
+  <div id="loading">
+    <h1>Loading... <br>Carregando</h1>
+  </div>
+</body>
 </html>
