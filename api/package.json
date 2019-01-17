@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "./index.js",
   "scripts": {
-    "start": "pm2-docker start --json pm2.json"
+    "start": "pm2-docker start --json pm2.json",
     "deploy": "rsync -az --exclude 'node_modules*' --exclude '.env' ./ lion@alia.ml:/home/lion/arcane_capsule/api --progress --itemize-changes"
   },
   "dependencies": {
