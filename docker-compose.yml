@@ -10,15 +10,16 @@ services:
     build:
       context: ./api
       args:
-        - NODE_ENV=development
+        - NODE_ENV=production
         - PORT=1666
-    command: nodemon
+    command: nodemon -L
     env_file:
       - ./api/.env
     ports:
       - 1666:1666
     volumes:
       - ./api:/opt/app
+      - ./api:/opt/app/node_modules
     links:
       - db
     depends_on:
