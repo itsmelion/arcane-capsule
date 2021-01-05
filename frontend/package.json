@@ -9,7 +9,7 @@
     "deploy": "npm run build && npm run push"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "flamework": "^3.0.10",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
